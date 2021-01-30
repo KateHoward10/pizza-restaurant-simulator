@@ -1,17 +1,20 @@
 <template>
   <Oven />
   <Surface />
+  <Menu />
 </template>
 
 <script>
 import Oven from './components/Oven.vue'
 import Surface from './components/Surface.vue'
+import Menu from './components/Menu.vue'
 
 export default {
   name: 'App',
   components: {
     Oven,
-    Surface
+    Surface,
+    Menu
   }
 }
 </script>
