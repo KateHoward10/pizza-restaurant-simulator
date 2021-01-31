@@ -1,7 +1,7 @@
 <template>
+  <Menu />
   <Oven />
   <Surface />
-  <Menu />
 </template>
 
 <script>

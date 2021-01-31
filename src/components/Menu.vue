@@ -1,13 +1,20 @@
 <template>
-  <ul>
-    <li v-for="(pizza, index) in menu" :key="index">
-      <span class="name">{{ pizza.name }}</span>
-      {{ pizza.description }}
-    </li>
-  </ul>
+  <div class="controls">
+    <button @click="menuOpen = true">Menu</button>
+    <div v-if="menuOpen" class="container">
+      <button @click="menuOpen = false" class="close-button">✕</button>
+      <ul>
+        <li v-for="(pizza, index) in menu" :key="index">
+          <span class="name">{{ pizza.name }}</span>
+          {{ pizza.description }}
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 import { data } from '../data.js'
 
 export default {
@@ -20,21 +27,37 @@ export default {
         description
       }
     });
-    return { menu };
+    const menuOpen = ref(false);
+    return { menu, menuOpen };
   }
 }
 </script>
 
 <style scoped>
+.controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 8px;
+  text-align: left;
+}
+.container {
+  max-width: 240px;
+  background-color: #eee;
+  position: relative;
+}
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background-color: transparent;
+  margin: 2px;
+}
 ul {
   list-style: none;
   margin: 0;
   padding: 8px;
-  max-width: 240px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #eee;
 }
 li {
   margin-bottom: 12px;
