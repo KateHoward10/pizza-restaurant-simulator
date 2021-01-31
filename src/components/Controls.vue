@@ -1,5 +1,6 @@
 <template>
   <div class="controls">
+    <button @click="newBase">New base</button>
     <button @click="menuOpen = true">Menu</button>
     <div v-if="menuOpen" class="container">
       <button @click="menuOpen = false" class="close-button">✕</button>
@@ -18,7 +19,10 @@ import { ref } from 'vue'
 import { data } from '../data.js'
 
 export default {
-  name: 'Menu',
+  name: 'Controls',
+  props: {
+    newBase: Function
+  },
   setup() {
     const menu = data.menu.map(pizza => {
       const description = pizza.ingredients.map(ingredient => data.ingredients[ingredient].name).join(", ");
@@ -40,6 +44,10 @@ export default {
   left: 0;
   padding: 8px;
   text-align: left;
+}
+button {
+  display: block;
+  margin: 4px;
 }
 .container {
   max-width: 240px;

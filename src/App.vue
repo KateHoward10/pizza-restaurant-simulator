@@ -1,20 +1,30 @@
 <template>
-  <Menu />
+  <Controls :newBase="newBase" />
   <Oven />
-  <Surface />
+  <Surface :currentPizza="currentPizza" />
 </template>
 
 <script>
+import { ref } from 'vue'
 import Oven from './components/Oven.vue'
 import Surface from './components/Surface.vue'
-import Menu from './components/Menu.vue'
+import Controls from './components/Controls.vue'
 
 export default {
   name: 'App',
+  setup() {
+    const currentPizza = ref(null);
+
+    function newBase() {
+      currentPizza.value = [];
+    }
+
+    return { currentPizza, newBase };
+  },
   components: {
+    Controls,
     Oven,
-    Surface,
-    Menu
+    Surface
   }
 }
 </script>
