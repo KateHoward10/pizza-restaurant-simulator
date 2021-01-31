@@ -1,7 +1,11 @@
 <template>
   <div class="surface">
     <div class="pizza-container">
-      <div class="pizza" v-if="currentPizza !== null" />
+      <Pizza
+        v-if="currentPizza !== null"
+        :currentPizza="currentPizza"
+        :addTopping="addTopping"
+      />
     </div>
     <div class="ingredients">
       <div
@@ -19,6 +23,7 @@
 
 <script>
 import { ingredients } from '../data.js'
+import Pizza from './Pizza.vue'
 
 export default {
   name: 'Surface',
@@ -28,7 +33,11 @@ export default {
   props: {
     currentPizza: Array,
     selected: Number,
-    selectIngredient: Function
+    selectIngredient: Function,
+    addTopping: Function
+  },
+  components: {
+    Pizza
   }
 }
 </script>
@@ -69,11 +78,5 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 40px;
-}
-.pizza {
-  height: 180px;
-  width: 280px;
-  border-radius: 50%;
-  background-color: #ffeebf;
 }
 </style>

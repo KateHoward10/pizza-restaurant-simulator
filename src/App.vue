@@ -1,7 +1,12 @@
 <template>
   <Controls :newBase="newBase" />
   <Oven />
-  <Surface :currentPizza="currentPizza" :selected="selected" :selectIngredient="selectIngredient" />
+  <Surface
+    :currentPizza="currentPizza"
+    :selected="selected"
+    :selectIngredient="selectIngredient"
+    :addTopping="addTopping"
+  />
 </template>
 
 <script>
@@ -24,7 +29,13 @@ export default {
       selected.value = index;
     }
 
-    return { currentPizza, newBase, selected, selectIngredient };
+    function addTopping() {
+      if (currentPizza.value !== null && selected.value !== null) {
+        currentPizza.value.push(selected.value);
+      }
+    }
+
+    return { currentPizza, newBase, selected, selectIngredient, addTopping };
   },
   components: {
     Controls,
