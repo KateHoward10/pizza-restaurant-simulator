@@ -5,7 +5,7 @@
     <div v-if="menuOpen" class="container">
       <button @click="menuOpen = false" class="close-button">✕</button>
       <ul>
-        <li v-for="(pizza, index) in menu" :key="index">
+        <li v-for="(pizza, index) in list" :key="index">
           <span class="name">{{ pizza.name }}</span>
           {{ pizza.description }}
         </li>
@@ -16,7 +16,7 @@
 
 <script>
 import { ref } from 'vue'
-import { data } from '../data.js'
+import { ingredients, menu } from '../data.js'
 
 export default {
   name: 'Controls',
@@ -24,15 +24,15 @@ export default {
     newBase: Function
   },
   setup() {
-    const menu = data.menu.map(pizza => {
-      const description = pizza.ingredients.map(ingredient => data.ingredients[ingredient].name).join(", ");
+    const list = menu.map(pizza => {
+      const description = pizza.ingredients.map(ingredient => ingredients[ingredient].name).join(", ");
       return {
         ...pizza,
         description
       }
     });
     const menuOpen = ref(false);
-    return { menu, menuOpen };
+    return { list, menuOpen };
   }
 }
 </script>

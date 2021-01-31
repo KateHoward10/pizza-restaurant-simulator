@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="oven-container">
     <div class="chimney" />
     <div class="main-oven">
       <div class="door">
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.oven-container {
   display: flex;
   flex-direction: column;
   align-items: center;
