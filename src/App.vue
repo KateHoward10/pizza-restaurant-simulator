@@ -47,7 +47,13 @@ export default {
 
     function putPizzaInOven() {
       if (currentPizza.value !== null) {
-        pizzasInOven.value.push(currentPizza.value);
+        pizzasInOven.value.push({
+          toppings: currentPizza.value,
+          timeInOven: 0
+        });
+        setInterval(() => {
+          pizzasInOven.value[pizzasInOven.value.length - 1].timeInOven++;
+        }, 1000);
         currentPizza.value = null;
       }
     }
