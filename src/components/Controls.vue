@@ -44,6 +44,7 @@ export default {
   left: 0;
   padding: 8px;
   text-align: left;
+  z-index: 10;
 }
 button {
   display: block;

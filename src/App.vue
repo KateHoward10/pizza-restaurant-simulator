@@ -1,7 +1,7 @@
 <template>
   <Controls :newBase="newBase" />
   <Orders />
-  <Oven />
+  <Oven :putPizzaInOven="putPizzaInOven" />
   <Surface
     :currentPizza="currentPizza"
     :selected="selected"
@@ -22,6 +22,7 @@ export default {
   setup() {
     const currentPizza = ref(null);
     const selected = ref(null);
+    const pizzasInOven = ref([]);
 
     function newBase() {
       currentPizza.value = [];
@@ -37,7 +38,14 @@ export default {
       }
     }
 
-    return { currentPizza, newBase, selected, selectIngredient, addTopping };
+    function putPizzaInOven() {
+      if (currentPizza.value !== null) {
+        pizzasInOven.value.push(currentPizza.value);
+        currentPizza.value = null;
+      }
+    }
+
+    return { currentPizza, newBase, selected, selectIngredient, addTopping, putPizzaInOven };
   },
   components: {
     Orders,

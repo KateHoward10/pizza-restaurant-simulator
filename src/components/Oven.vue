@@ -1,7 +1,7 @@
 <template>
   <div class="oven-container">
     <div class="chimney" />
-    <div class="main-oven">
+    <div class="main-oven" @click="putPizzaInOven">
       <div class="door">
         <div class="floor" />
       </div>
@@ -11,7 +11,10 @@
 
 <script>
 export default {
-  name: 'Oven'
+  name: 'Oven',
+  props: {
+    putPizzaInOven: Function
+  }
 }
 </script>
 
