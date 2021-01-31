@@ -38,7 +38,7 @@ export default {
     });
     const menuOpen = ref(false);
     const formattedTime = computed(function() {
-      return `${props.time / 60 | 0}:${props.time % 60}${props.time % 60 < 10 ? '0' : ''}`;
+      return `${props.time / 60 | 0}:${props.time % 60 < 10 ? `0${props.time % 60}` : props.time % 60}`;
     })
     return { list, menuOpen, formattedTime };
   }

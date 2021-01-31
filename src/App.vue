@@ -54,6 +54,9 @@ export default {
 
     function start() {
       playing.value = true;
+      setInterval(() => {
+        time.value < 1320 ? time.value++ : playing.value = false;
+      }, 1000);
     }
 
     return {
