@@ -1,5 +1,6 @@
 <template>
   <Controls :newBase="newBase" />
+  <Orders />
   <Oven />
   <Surface
     :currentPizza="currentPizza"
@@ -11,9 +12,10 @@
 
 <script>
 import { ref } from 'vue'
+import Controls from './components/Controls.vue'
+import Orders from './components/Orders.vue'
 import Oven from './components/Oven.vue'
 import Surface from './components/Surface.vue'
-import Controls from './components/Controls.vue'
 
 export default {
   name: 'App',
@@ -38,6 +40,7 @@ export default {
     return { currentPizza, newBase, selected, selectIngredient, addTopping };
   },
   components: {
+    Orders,
     Controls,
     Oven,
     Surface
