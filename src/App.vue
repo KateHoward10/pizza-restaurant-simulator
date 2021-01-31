@@ -1,5 +1,10 @@
 <template>
-  <Controls :newBase="newBase" />
+  <Controls
+    :start="start"
+    :time="time"
+    :playing="playing"
+    :newBase="newBase"
+  />
   <Orders />
   <Oven :putPizzaInOven="putPizzaInOven" />
   <Surface
@@ -23,6 +28,8 @@ export default {
     const currentPizza = ref(null);
     const selected = ref(null);
     const pizzasInOven = ref([]);
+    const time = ref(1080);
+    const playing = ref(false);
 
     function newBase() {
       currentPizza.value = [];
@@ -45,7 +52,21 @@ export default {
       }
     }
 
-    return { currentPizza, newBase, selected, selectIngredient, addTopping, putPizzaInOven };
+    function start() {
+      playing.value = true;
+    }
+
+    return {
+      currentPizza,
+      newBase,
+      selected,
+      selectIngredient,
+      addTopping,
+      putPizzaInOven,
+      start,
+      time,
+      playing
+    };
   },
   components: {
     Orders,

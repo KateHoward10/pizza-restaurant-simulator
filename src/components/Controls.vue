@@ -1,5 +1,7 @@
 <template>
   <div class="controls">
+    <button v-if="!playing" @click="start">Start</button>
+    <p v-else>{{ formattedTime }}</p>
     <button @click="newBase">New base</button>
     <button @click="menuOpen = true">Menu</button>
     <div v-if="menuOpen" class="container">
@@ -15,15 +17,18 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { ingredients, menu } from '../data.js'
 
 export default {
   name: 'Controls',
   props: {
-    newBase: Function
+    newBase: Function,
+    start: Function,
+    time: Number,
+    playing: Boolean
   },
-  setup() {
+  setup(props) {
     const list = menu.map(pizza => {
       const description = pizza.ingredients.map(ingredient => ingredients[ingredient].name).join(", ");
       return {
@@ -32,7 +37,10 @@ export default {
       }
     });
     const menuOpen = ref(false);
-    return { list, menuOpen };
+    const formattedTime = computed(function() {
+      return `${props.time / 60 | 0}:${props.time % 60}${props.time % 60 < 10 ? '0' : ''}`;
+    })
+    return { list, menuOpen, formattedTime };
   }
 }
 </script>
