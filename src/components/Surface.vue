@@ -7,7 +7,9 @@
       <div
         v-for="(ingredient, index) in ingredients"
         :key="index"
+        @click="selectIngredient(index)"
         class="pot"
+        :class="{ selected: selected === index }"
       >
         {{ ingredient.icon }}
       </div>
@@ -24,7 +26,9 @@ export default {
     return { ingredients };
   },
   props: {
-    currentPizza: Array
+    currentPizza: Array,
+    selected: Number,
+    selectIngredient: Function
   }
 }
 </script>
@@ -54,6 +58,11 @@ export default {
   min-width: 30px;
   margin: 5px;
   font-size: 20px;
+  cursor: pointer;
+}
+.selected {
+  transform: scale(1.2);
+  border-color: #333;
 }
 .pizza-container {
   display: flex;

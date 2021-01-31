@@ -1,7 +1,7 @@
 <template>
   <Controls :newBase="newBase" />
   <Oven />
-  <Surface :currentPizza="currentPizza" />
+  <Surface :currentPizza="currentPizza" :selected="selected" :selectIngredient="selectIngredient" />
 </template>
 
 <script>
@@ -14,12 +14,17 @@ export default {
   name: 'App',
   setup() {
     const currentPizza = ref(null);
+    const selected = ref(null);
 
     function newBase() {
       currentPizza.value = [];
     }
 
-    return { currentPizza, newBase };
+    function selectIngredient(index) {
+      selected.value = index;
+    }
+
+    return { currentPizza, newBase, selected, selectIngredient };
   },
   components: {
     Controls,
