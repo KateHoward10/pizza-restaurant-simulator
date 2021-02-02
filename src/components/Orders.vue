@@ -6,10 +6,10 @@
       class="order"
     >
       <p
-        v-for="(item, index) in order"
+        v-for="({ item, quantity }, index) in formatOrder(order)"
         :key="index"
       >
-        1 ✕ {{ item }}
+        {{ quantity }} ✕ {{ item }}
       </p>
     </div>
   </div>
@@ -36,11 +36,18 @@ export default {
       return order;
     }
 
+    function formatOrder(order) {
+      const smOrder = [...new Set(order)];
+      return smOrder.map(pizza => {
+        return { item: pizza, quantity: order.filter(p => p === pizza).length };
+      });
+    }
+
     onMounted(() => {
       setInterval(() => orders.value.push(generateOrder()), 2000);
     })
 
-    return { orders };
+    return { orders, formatOrder };
   }
 }
 </script>
