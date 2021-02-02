@@ -1,5 +1,4 @@
 <template>
-  <div class="rod" />
   <div class="order-container">
     <div
       v-for="(order, index) in orders"
@@ -17,14 +16,17 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue'
 import { menu } from '../data.js'
 
 export default {
   name: 'Orders',
   props: {
-    newBase: Function
+    newBase: Function,
   },
   setup() {
+    const orders = ref([]);
+
     function generateOrder() {
       const number = (Math.random() * 3 | 0) + 1;
       const order = [];
@@ -34,7 +36,9 @@ export default {
       return order;
     }
 
-    const orders = [generateOrder(), generateOrder(), generateOrder()];
+    onMounted(() => {
+      setInterval(() => orders.value.push(generateOrder()), 2000);
+    })
 
     return { orders };
   }
@@ -42,25 +46,20 @@ export default {
 </script>
 
 <style scoped>
-.rod {
-  width: 100%;
-  height: 8px;
-  background-color: #ddd;
-}
 .order-container {
   width: 100%;
   z-index: 5;
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   align-items: flex-start;
-  justify-content: flex-end;
+  justify-content: flex-start;
   position: absolute;
   left: 0;
   right: 0;
 }
 .order {
   background-color: #fa9f28;
-  margin: 10px;
+  margin: 8px;
   min-width: 90px;
   font-size: 14px;
 }

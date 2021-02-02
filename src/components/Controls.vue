@@ -2,7 +2,7 @@
   <div class="controls">
     <button v-if="!playing" @click="start">Start</button>
     <p v-else>{{ formattedTime }}</p>
-    <button @click="newBase">New base</button>
+    <button v-if="playing" @click="newBase">New base</button>
     <button @click="menuOpen = true">Menu</button>
     <div v-if="menuOpen" class="container">
       <button @click="menuOpen = false" class="close-button">✕</button>

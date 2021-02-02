@@ -1,11 +1,12 @@
 <template>
+  <div class="rod" />
   <Controls
     :start="start"
     :time="time"
     :playing="playing"
     :newBase="newBase"
   />
-  <Orders />
+  <Orders v-if="playing" />
   <Oven :putPizzaInOven="putPizzaInOven" />
   <Surface
     :currentPizza="currentPizza"
@@ -101,5 +102,10 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+}
+.rod {
+  width: 100%;
+  height: 8px;
+  background-color: #ddd;
 }
 </style>
