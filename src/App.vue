@@ -7,7 +7,7 @@
     :newBase="newBase"
   />
   <Orders v-if="playing" />
-  <Oven :putPizzaInOven="putPizzaInOven" />
+  <Oven :putPizzaInOven="putPizzaInOven" :pizzasInOven="pizzasInOven" />
   <Surface
     :currentPizza="currentPizza"
     :selected="selected"
@@ -68,8 +68,9 @@ export default {
 
     return {
       currentPizza,
-      newBase,
       selected,
+      pizzasInOven,
+      newBase,
       selectIngredient,
       addTopping,
       putPizzaInOven,

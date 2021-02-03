@@ -3,7 +3,13 @@
     <div class="chimney" />
     <div class="main-oven" @click="putPizzaInOven">
       <div class="door">
-        <div class="floor" />
+        <div class="floor">
+          <div
+            v-for="(pizza, index) in pizzasInOven"
+            :key="index"
+            class="pizza"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -13,7 +19,8 @@
 export default {
   name: 'Oven',
   props: {
-    putPizzaInOven: Function
+    putPizzaInOven: Function,
+    pizzasInOven: Array
   }
 }
 </script>
@@ -57,5 +64,14 @@ export default {
   height: 40px;
   width: 180px;
   background-color: #b45400;
+  display: flex;
+  flex-flow: row wrap;
+}
+.pizza {
+  height: 10px;
+  width: 80px;
+  background-color: #ffeebf;
+  border-radius: 5px;
+  margin: 5px;
 }
 </style>
