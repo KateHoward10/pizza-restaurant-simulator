@@ -7,7 +7,9 @@
           <div
             v-for="(pizza, index) in pizzasInOven"
             :key="index"
-            class="pizza"
+            @click="removePizza(index)"
+            class="space"
+            :class="{'pizza': pizza !== null}"
           />
         </div>
       </div>
@@ -20,7 +22,8 @@ export default {
   name: 'Oven',
   props: {
     putPizzaInOven: Function,
-    pizzasInOven: Array
+    pizzasInOven: Array,
+    removePizza: Function
   }
 }
 </script>
@@ -67,11 +70,14 @@ export default {
   display: flex;
   flex-flow: row wrap;
 }
-.pizza {
+.space {
   height: 10px;
   width: 80px;
+  margin: 5px;
+}
+.pizza {
   background-color: #ffeebf;
   border-radius: 5px;
-  margin: 5px;
+  cursor: pointer;
 }
 </style>

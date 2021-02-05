@@ -7,7 +7,11 @@
     :newBase="newBase"
   />
   <Orders v-if="playing" />
-  <Oven :putPizzaInOven="putPizzaInOven" :pizzasInOven="pizzasInOven" />
+  <Oven
+    :putPizzaInOven="putPizzaInOven"
+    :pizzasInOven="pizzasInOven"
+    :removePizza="removePizza"
+  />
   <Surface
     :currentPizza="currentPizza"
     :selected="selected"
@@ -28,7 +32,7 @@ export default {
   setup() {
     const currentPizza = ref(null);
     const selected = ref(null);
-    const pizzasInOven = ref([]);
+    const pizzasInOven = ref([null,null,null,null]);
     const time = ref(1080);
     const playing = ref(false);
 
@@ -47,16 +51,21 @@ export default {
     }
 
     function putPizzaInOven() {
-      if (currentPizza.value !== null) {
-        pizzasInOven.value.push({
+      if (currentPizza.value !== null && pizzasInOven.value.indexOf(null) > -1) {
+        const pizzaIndex = pizzasInOven.value.indexOf(null);
+        pizzasInOven.value[pizzaIndex] = {
           toppings: currentPizza.value,
           timeInOven: 0
-        });
+        };
         setInterval(() => {
-          pizzasInOven.value[pizzasInOven.value.length - 1].timeInOven++;
+          if (pizzasInOven.value[pizzaIndex]) pizzasInOven.value[pizzaIndex].timeInOven++;
         }, 1000);
         currentPizza.value = null;
       }
+    }
+
+    function removePizza(index) {
+      pizzasInOven.value[index] = null;
     }
 
     function start() {
@@ -74,6 +83,7 @@ export default {
       selectIngredient,
       addTopping,
       putPizzaInOven,
+      removePizza,
       start,
       time,
       playing
