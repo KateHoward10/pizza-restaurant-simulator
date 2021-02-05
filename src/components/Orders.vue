@@ -26,6 +26,7 @@ export default {
   },
   setup() {
     const orders = ref([]);
+    const interval = ref(5000);
 
     function generateOrder() {
       const number = (Math.random() * 3 | 0) + 1;
@@ -44,7 +45,10 @@ export default {
     }
 
     onMounted(() => {
-      setInterval(() => orders.value.push(generateOrder()), 2000);
+      setInterval(() => {
+        orders.value.push(generateOrder());
+        interval.value = (Math.random() * 10000) + 10000;
+      }, interval.value);
     })
 
     return { orders, formatOrder };
