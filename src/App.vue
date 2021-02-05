@@ -17,6 +17,8 @@
     :selected="selected"
     :selectIngredient="selectIngredient"
     :addTopping="addTopping"
+    :boxOpen="boxOpen"
+    :openBox="openBox"
   />
 </template>
 
@@ -35,6 +37,7 @@ export default {
     const pizzasInOven = ref([null,null,null,null]);
     const time = ref(1080);
     const playing = ref(false);
+    const boxOpen = ref(false);
 
     function newBase() {
       currentPizza.value = [];
@@ -68,6 +71,10 @@ export default {
       pizzasInOven.value[index] = null;
     }
 
+    function openBox() {
+      if (currentPizza.value === null) boxOpen.value = true;
+    }
+
     function start() {
       playing.value = true;
       setInterval(() => {
@@ -84,6 +91,8 @@ export default {
       addTopping,
       putPizzaInOven,
       removePizza,
+      boxOpen,
+      openBox,
       start,
       time,
       playing

@@ -6,6 +6,7 @@
         :currentPizza="currentPizza"
         :addTopping="addTopping"
       />
+      <div class="open-box" v-if="boxOpen" />
     </div>
     <div class="ingredients">
       <div
@@ -18,7 +19,7 @@
         {{ ingredient.icon }}
       </div>
     </div>
-    <div class="boxes">
+    <div class="boxes" @click="openBox">
       <div v-for="index in [0,1,2,3]" :key="index" class="box" />
     </div>
   </div>
@@ -37,7 +38,9 @@ export default {
     currentPizza: Array,
     selected: Number,
     selectIngredient: Function,
-    addTopping: Function
+    addTopping: Function,
+    boxOpen: Boolean,
+    openBox: Function
   },
   components: {
     Pizza
@@ -94,6 +97,11 @@ export default {
   width: 180px;
   height: 20px;
   border: 1px solid #ddd;
+  background-color: #fff;
+}
+.open-box {
+  width: 300px;
+  height: 150px;
   background-color: #fff;
 }
 </style>
