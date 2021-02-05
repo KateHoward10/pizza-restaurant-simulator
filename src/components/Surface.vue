@@ -18,6 +18,9 @@
         {{ ingredient.icon }}
       </div>
     </div>
+    <div class="boxes">
+      <div v-for="index in [0,1,2,3]" :key="index" class="box" />
+    </div>
   </div>
 </template>
 
@@ -50,6 +53,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 }
 .ingredients {
   width: 100%;
@@ -78,5 +82,18 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 40px;
+}
+.boxes {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+.box {
+  width: 180px;
+  height: 20px;
+  border: 1px solid #ddd;
+  background-color: #fff;
 }
 </style>
