@@ -16,27 +16,17 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
-import { menu } from '../data.js'
+import { onMounted } from 'vue'
 
 export default {
   name: 'Orders',
   props: {
     newBase: Function,
+    orders: Array,
+    interval: Number,
+    startAddingOrders: Function
   },
-  setup() {
-    const orders = ref([]);
-    const interval = ref(5000);
-
-    function generateOrder() {
-      const number = (Math.random() * 3 | 0) + 1;
-      const order = [];
-      for (let i = 0; i < number; i++) {
-        order.push(menu[Math.random() * menu.length | 0].name);
-      }
-      return order;
-    }
-
+  setup(props) {
     function formatOrder(order) {
       const smOrder = [...new Set(order)];
       return smOrder.map(pizza => {
@@ -44,14 +34,9 @@ export default {
       });
     }
 
-    onMounted(() => {
-      setInterval(() => {
-        orders.value.push(generateOrder());
-        interval.value = (Math.random() * 10000) + 10000;
-      }, interval.value);
-    })
+    onMounted(() => props.startAddingOrders());
 
-    return { orders, formatOrder };
+    return { formatOrder };
   }
 }
 </script>

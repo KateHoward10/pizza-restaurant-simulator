@@ -6,7 +6,12 @@
     :playing="playing"
     :newBase="newBase"
   />
-  <Orders v-if="playing" />
+  <Orders
+    v-if="playing"
+    :orders="orders"
+    :interval="interval"
+    :startAddingOrders="startAddingOrders"
+  />
   <Oven
     :putPizzaInOven="putPizzaInOven"
     :pizzasInOven="pizzasInOven"
@@ -28,6 +33,7 @@ import Controls from './components/Controls.vue'
 import Orders from './components/Orders.vue'
 import Oven from './components/Oven.vue'
 import Surface from './components/Surface.vue'
+import { menu } from './data.js'
 
 export default {
   name: 'App',
@@ -39,6 +45,9 @@ export default {
     const playing = ref(false);
     const removedPizza = ref(null);
     const boxedPizzas = ref([]);
+    const orders = ref([]);
+    const interval = ref(5000);
+    const selectedOrder = ref(null);
 
     function newBase() {
       currentPizza.value = [];
@@ -79,6 +88,26 @@ export default {
       }
     }
 
+    function generateOrder() {
+      const number = (Math.random() * 3 | 0) + 1;
+      const order = [];
+      for (let i = 0; i < number; i++) {
+        order.push(menu[Math.random() * menu.length | 0].name);
+      }
+      return order;
+    }
+
+    function startAddingOrders() {
+      setInterval(() => {
+        orders.value.push(generateOrder());
+        interval.value = (Math.random() * 10000) + 10000;
+      }, interval.value);
+    }
+
+    function selectOrder(index) {
+      selectedOrder.value = orders[index];
+    }
+
     function start() {
       playing.value = true;
       setInterval(() => {
@@ -91,6 +120,7 @@ export default {
       selected,
       pizzasInOven,
       newBase,
+      orders,
       selectIngredient,
       addTopping,
       putPizzaInOven,
@@ -99,7 +129,9 @@ export default {
       boxPizza,
       start,
       time,
-      playing
+      playing,
+      startAddingOrders,
+      selectOrder
     };
   },
   components: {
