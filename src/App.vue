@@ -11,6 +11,8 @@
     :orders="orders"
     :interval="interval"
     :startAddingOrders="startAddingOrders"
+    :selectOrder="selectOrder"
+    :boxedPizzas="boxedPizzas"
   />
   <Oven
     :putPizzaInOven="putPizzaInOven"
@@ -47,7 +49,6 @@ export default {
     const boxedPizzas = ref([]);
     const orders = ref([]);
     const interval = ref(5000);
-    const selectedOrder = ref(null);
 
     function newBase() {
       currentPizza.value = [];
@@ -105,7 +106,17 @@ export default {
     }
 
     function selectOrder(index) {
-      selectedOrder.value = orders[index];
+      if (boxedPizzas.value.length) {
+        if (boxedPizzas.value.length === orders.value[index].length &&
+          orders.value[index].every(o => boxedPizzas.value.find(b =>
+            b.toppings.sort().toString() === menu.find(m => m.name === o).ingredients.toString()
+        ))) {
+          alert("Well done! This order is correct");
+          orders.value = orders.value.filter((_, i) => i !== index);
+        } else {
+          alert("Oops, this order is not correct!");
+        }
+      }
     }
 
     function start() {

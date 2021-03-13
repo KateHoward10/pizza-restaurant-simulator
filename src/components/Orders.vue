@@ -4,6 +4,8 @@
       v-for="(order, index) in orders"
       :key="index"
       class="order"
+      :class="{ pointer: boxedPizzas.length }"
+      @click="selectOrder(index)"
     >
       <p
         v-for="({ item, quantity }, index) in formatOrder(order)"
@@ -23,8 +25,9 @@ export default {
   props: {
     newBase: Function,
     orders: Array,
-    interval: Number,
-    startAddingOrders: Function
+    startAddingOrders: Function,
+    selectOrder: Function,
+    boxedPizzas: Array
   },
   setup(props) {
     function formatOrder(order) {
@@ -58,5 +61,8 @@ export default {
   margin: 8px;
   min-width: 90px;
   font-size: 14px;
+}
+.pointer {
+  cursor: pointer;
 }
 </style>

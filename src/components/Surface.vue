@@ -33,9 +33,6 @@ import Pizza from './Pizza.vue'
 
 export default {
   name: 'Surface',
-  setup() {
-    return { ingredients };
-  },
   props: {
     currentPizza: Array,
     selected: Number,
@@ -43,6 +40,9 @@ export default {
     addTopping: Function,
     boxedPizzas: Array,
     boxPizza: Function
+  },
+  setup() {
+    return { ingredients };
   },
   components: {
     Pizza
