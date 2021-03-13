@@ -9,6 +9,7 @@
       <div v-if="currentPizza === null">
         <div v-for="(box, index) in boxedPizzas" :key="index" class="box" />
       </div>
+      <div v-if="message" class="message">{{ message }}<button @click="clearMessage">Continue</button></div>
     </div>
     <div class="ingredients">
       <div
@@ -39,7 +40,9 @@ export default {
     selectIngredient: Function,
     addTopping: Function,
     boxedPizzas: Array,
-    boxPizza: Function
+    boxPizza: Function,
+    message: String,
+    clearMessage: Function
   },
   setup() {
     return { ingredients };
@@ -84,6 +87,7 @@ export default {
 }
 .pizza-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 40px;
@@ -100,5 +104,13 @@ export default {
   height: 20px;
   border: 1px solid #ddd;
   background-color: #fff;
+}
+.message {
+  background-color: #eee;
+  padding: 2px;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

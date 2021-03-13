@@ -26,6 +26,8 @@
     :addTopping="addTopping"
     :boxedPizzas="boxedPizzas"
     :boxPizza="boxPizza"
+    :message="message"
+    :clearMessage="clearMessage"
   />
 </template>
 
@@ -49,6 +51,7 @@ export default {
     const boxedPizzas = ref([]);
     const orders = ref([]);
     const interval = ref(5000);
+    const message = ref("");
 
     function newBase() {
       currentPizza.value = [];
@@ -109,14 +112,19 @@ export default {
       if (boxedPizzas.value.length) {
         if (boxedPizzas.value.length === orders.value[index].length &&
           orders.value[index].every(o => boxedPizzas.value.find(b =>
-            b.toppings.sort().toString() === menu.find(m => m.name === o).ingredients.toString()
+            [...b.toppings].sort((a, b) => a - b).toString() === menu.find(m => m.name === o).ingredients.toString()
         ))) {
-          alert("Well done! This order is correct");
+          message.value = "Well done! This order is correct";
           orders.value = orders.value.filter((_, i) => i !== index);
         } else {
-          alert("Oops, this order is not correct!");
+          message.value = "Oops, this order is not correct!";
         }
       }
+    }
+
+    function clearMessage() {
+      message.value = "";
+      boxedPizzas.value =  [];
     }
 
     function start() {
@@ -142,7 +150,9 @@ export default {
       time,
       playing,
       startAddingOrders,
-      selectOrder
+      selectOrder,
+      message,
+      clearMessage
     };
   },
   components: {
