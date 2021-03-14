@@ -50,7 +50,6 @@ export default {
     const removedPizza = ref(null);
     const boxedPizzas = ref([]);
     const orders = ref([]);
-    const interval = ref(5000);
     const message = ref("");
 
     function newBase() {
@@ -102,10 +101,13 @@ export default {
     }
 
     function startAddingOrders() {
-      setInterval(() => {
+      let interval = 4000;
+      function addNewOrder() {
         orders.value.push(generateOrder());
-        interval.value = (Math.random() * 10000) + 10000;
-      }, interval.value);
+        interval = (Math.random() * 15000) + 15000;
+        setTimeout(addNewOrder, interval);
+      }
+      setTimeout(addNewOrder, interval);
     }
 
     function selectOrder(index) {
