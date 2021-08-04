@@ -6,9 +6,6 @@
         :currentPizza="currentPizza"
         :addTopping="addTopping"
       />
-      <div v-if="currentPizza === null">
-        <div v-for="(box, index) in boxedPizzas" :key="index" class="box" />
-      </div>
       <div v-if="message" class="message">{{ message }}<button @click="clearMessage">Continue</button></div>
     </div>
     <div class="ingredients">
@@ -24,6 +21,7 @@
     </div>
     <div class="boxes" @click="boxPizza">
       <div v-for="index in [0,1,2,3]" :key="index" class="box" />
+      <div v-for="(box, index) in boxedPizzas" :key="index" class=" box boxed-pizza" />
     </div>
   </div>
 </template>
@@ -104,6 +102,10 @@ export default {
   height: 20px;
   border: 1px solid #ddd;
   background-color: #fff;
+}
+.boxed-pizza {
+  margin-top: 5px;
+  border-color: #2ECC71;
 }
 .message {
   background-color: #eee;

@@ -86,13 +86,13 @@ export default {
     }
 
     function boxPizza() {
-      if (currentPizza.value === null && removedPizza.value !== null) {
+      if (removedPizza.value !== null) {
         boxedPizzas.value.push(removedPizza.value);
       }
     }
 
     function generateOrder() {
-      const number = (Math.random() * 3 | 0) + 1;
+      const number = 1;
       const order = [];
       for (let i = 0; i < number; i++) {
         order.push(menu[Math.random() * menu.length | 0].name);
